@@ -19,7 +19,23 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.only(top: screenHeight * 0.30, left: screenWidth * 0.05, right: screenWidth * 0.05),
           child: Column(
             children: [
-                Icon(Icons.settings, size: 80,  color: Color(0xFF044B91))
+                Icon(Icons.settings, size: 80,  color: Color(0xFF044B91)),
+                SizedBox(
+                  child: Column(
+                    children: [
+                      SizedBox(height: screenHeight * 0.03,),
+                      Text('Login Now', style: TextStyle(
+                        color:Color(0xFF044B91),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),),
+                      Text('Please login to continue using our app',  style: TextStyle(
+                        color:Color(0xFF044B91),
+
+                      ),)
+                    ],
+                  ),
+                )
             ],
           ),
         ),
