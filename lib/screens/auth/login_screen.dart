@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tiles_shop_management/widgets/button.dart';
+import 'package:tiles_shop_management/widgets/input_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -8,6 +10,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late String email;
+
+   onEmailChange (value) {
+    setState(() {
+      email: value;
+    });
+  }
   @override
   Widget build(BuildContext context) {
       double screenWidth = MediaQuery.of(context).size.width;
@@ -16,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return  Scaffold(
       body: Center(
         child: Padding(
-          padding: EdgeInsets.only(top: screenHeight * 0.30, left: screenWidth * 0.05, right: screenWidth * 0.05),
+          padding: EdgeInsets.only(top: screenHeight * 0.20, left: screenWidth * 0.05, right: screenWidth * 0.05),
           child: Column(
             children: [
                 Icon(Icons.settings, size: 80,  color: Color(0xFF044B91)),
@@ -32,9 +41,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text('Please login to continue using our app',  style: TextStyle(
                         color:Color(0xFF044B91),
 
-                      ),)
+                      ),),
+                      SizedBox(height: screenHeight * 0.03,),
+                      CustomInputs(label: 'Email',fieldType: false, onChanged: (value) {
+                        onEmailChange(value);
+                      },),
+                      SizedBox(height: screenHeight * 0.03,),
+
+                       CustomInputs(label: 'Password',fieldType: true, onChanged: (value) {
+                        onEmailChange(value);
+                      },),
+
+                      SizedBox(height: screenHeight * 0.03,),
+
+                      CustomButton(btn_label: 'Log-In', onPressed: () {},)
                     ],
                   ),
+                  
                 )
             ],
           ),
