@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tiles_shop_management/main.dart';
 import 'package:tiles_shop_management/widgets/button.dart';
 import 'package:tiles_shop_management/widgets/input_field.dart';
+import 'package:go_router/go_router.dart';
+import '../../services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -54,7 +57,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       SizedBox(height: screenHeight * 0.03,),
 
-                      CustomButton(btn_label: 'Log-In', onPressed: () {},)
+                      CustomButton(btn_label: 'Log-In', onPressed: () {
+                             AuthService.login(); // Simulate login
+                              context.go('/tabs'); 
+                      },)
                     ],
                   ),
                   
