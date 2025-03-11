@@ -98,6 +98,7 @@ class _HomeState extends State<Home> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         actions: [
           Icon(Icons.sailing, color: const Color.fromARGB(255, 255, 4, 201), size: 35,)
@@ -123,7 +124,7 @@ class _HomeState extends State<Home> {
             ),
              SizedBox(
                   width: screenWidth * 0.9,
-                  child: CustomInputs(label: 'Search By Name',fieldType: false, onChanged: (value) {
+                  child: CustomInputs(label: 'Search By Name',height: 35, fieldType: false, onChanged: (value) {
                           onEmailChange(value);
                         },),
                 ),
@@ -147,21 +148,25 @@ class _HomeState extends State<Home> {
             ),
             Row(
               children: [
-                SizedBox(width: 20,),
+                SizedBox(width: 10,),
                 SizedBox(
-                  height: 40,
-                  width: 100,
+                  height: 25,
+                  width: 90,
                   child: ElevatedButton(
                     onPressed: filterBySize, 
-                    child: Text('Sizes')),
+                    child: Text('Sizes', style: TextStyle(
+                      fontSize: 12
+                    ),)),
                 ),
                 SizedBox(width: 50,),
                  SizedBox(
-                  height: 40,
-                  width: 110,
+                  height: 25,
+                  width: 100,
                   child: ElevatedButton(
                     onPressed: filterByCategory, 
-                    child: Text('Category')),
+                    child: Text('Category', style: TextStyle(
+                      fontSize: 12
+                    ),)),
                 )
               ],
             ),

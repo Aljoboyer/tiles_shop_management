@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:tiles_shop_management/screens/auth/login_screen.dart';
+import 'package:tiles_shop_management/screens/maintanence/product_details.dart';
 import 'package:tiles_shop_management/screens/tabs/bottomtab_screen.dart';
 import 'package:tiles_shop_management/services/auth_service.dart';
 
@@ -12,8 +13,16 @@ class AppRouter {
         builder: (context, state) => LoginScreen(),
       ),
       GoRoute(
-        path: '/tabs',
-        builder: (context, state) => BottomTabScreen(),
+        path: '/details',
+        builder: (context, state) => ProductDetails(),
+      ),
+      GoRoute(
+      path: '/tabs/:tab', // Define dynamic parameter
+      builder: (context, state) {
+        final String? tab = state.pathParameters['tab']; // Get tab parameter
+        final int tabIndex = int.tryParse(tab ?? '0') ?? 0;
+        return BottomTabScreen(initialTab: tabIndex); // Pass it to the screen
+      },
       ),
       // GoRoute(
       //   path: '/product-details/:id',

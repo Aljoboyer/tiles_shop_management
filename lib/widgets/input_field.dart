@@ -5,6 +5,9 @@ class CustomInputs extends StatelessWidget {
   final String? inputError;
   final Function(String) onChanged;
   final bool fieldType;
+  final double? height;
+  final TextInputType ? keyboardType;
+  final int ? maxLines;
 
   const CustomInputs({
     super.key,
@@ -12,6 +15,9 @@ class CustomInputs extends StatelessWidget {
     this.inputError,
     required this.onChanged,
     required this.fieldType,
+    this.height,
+    this.keyboardType = TextInputType.text,
+    this.maxLines,
   });
 
   @override
@@ -28,13 +34,16 @@ class CustomInputs extends StatelessWidget {
               ),)),
             SizedBox(height: 10,),
            SizedBox(
-            height: 40,
+            height: height ?? 40,
             child: TextField(
-              obscureText: fieldType,
+            obscureText: fieldType,
             cursorHeight: 17,
+            keyboardType:  keyboardType,
+            maxLines: maxLines ?? 1,
             decoration: InputDecoration(
               
               hintText: 'Enter $label',
+              hintStyle: TextStyle(fontSize: 14),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
               ),

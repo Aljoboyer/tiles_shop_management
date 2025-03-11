@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       CustomButton(btn_label: 'Log-In', onPressed: () {
                              AuthService.login(); // Simulate login
-                              context.go('/tabs'); 
+                             context.go('/tabs/0');
                       },)
                     ],
                   ),
