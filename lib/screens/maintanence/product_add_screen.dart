@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiles_shop_management/utils/constant/cons_data.dart';
 import 'package:tiles_shop_management/widgets/button.dart';
 import 'package:tiles_shop_management/widgets/dropdown.dart';
 import 'package:tiles_shop_management/widgets/input_field.dart';
@@ -18,19 +19,14 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
     final TextEditingController _productNameController = TextEditingController();
     final TextEditingController _productPieceController = TextEditingController();
 
-
-  List<String> sizeitems = ["300x300 mm (12x12 inches)", "600x600 mm (24x24 inches)", "800x800 mm (32x32 inches)", "1000x1000 mm (40x40 inches)", "200x300 mm (8x12 inches)", "75x150 mm (3x6 inches)", "25x25 mm (1x1 inch)"]; 
-
-  List<String> categoryitems = ["Ceramic Tiles", "Porcelain Tiles", "Mosaic Tiles", "Marble Tiles", "Cement Tiles", "Terracotta Tiles", "Floor Tiles", "Parking Tiles", "Roof Tiles", "Wooden Finish Tiles"]; 
-
   void showSizeDropdown ()async {
-    await showDropDown(context, sizeitems, (item) {setState(() {
+    await showDropDown(context, sizeItems, (item) {setState(() {
       selectedSizeValue = item;
       });});
   }
 
   void showCategoryDropdown ()async {
-    await showDropDown(context, categoryitems, (item) {setState(() {
+    await showDropDown(context, categoryItems, (item) {setState(() {
       selectedCatgoryValue = item;
       });});
   }
