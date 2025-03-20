@@ -58,9 +58,7 @@ class _SellProductScreenState extends State<SellProductScreen> {
 
               SizedBox(height: 20,),
 
-              CustomInputs(label: 'Tiles Name',fieldType: false, onChanged: (value) {
-                          onEmailChange(value);
-                        },),
+              CustomInputs(label: 'Tiles Name',fieldType: false, ),
               SizedBox(height: 20,),
               
               Align(
@@ -98,9 +96,7 @@ class _SellProductScreenState extends State<SellProductScreen> {
               ),
               SizedBox(height: 20,),
 
-               CustomInputs(label: 'Tiles Pieces',fieldType: false, onChanged: (value) {
-                          onEmailChange(value);
-                        },),
+               CustomInputs(label: 'Tiles Pieces',fieldType: false, ),
                SizedBox(height: 20,),
               
               Align(
@@ -148,21 +144,13 @@ class _SellProductScreenState extends State<SellProductScreen> {
               ),)),
                SizedBox(height: 20,),
 
-               CustomInputs(label: 'Customer Name',fieldType: false, onChanged: (value) {
-                          onEmailChange(value);
-                        },),
+               CustomInputs(label: 'Customer Name',fieldType: false, ),
                SizedBox(height: 20,),
-               CustomInputs(label: 'Shop Name',fieldType: false, onChanged: (value) {
-                          onEmailChange(value);
-                        },),
+               CustomInputs(label: 'Shop Name',fieldType: false, ),
                SizedBox(height: 20,),
-               CustomInputs(label: 'Customer Phone',keyboardType: TextInputType.number, fieldType: false, onChanged: (value) {
-                          onEmailChange(value);
-                        },),
+               CustomInputs(label: 'Customer Phone',keyboardType: TextInputType.number, fieldType: false, ),
                SizedBox(height: 20,),
-               CustomInputs(label: 'Location',maxLines: 10, height: 90, fieldType: false, keyboardType: TextInputType.multiline, onChanged: (value) {
-                          onEmailChange(value);
-                        },),
+               CustomInputs(label: 'Location',maxLines: 10, height: 90, fieldType: false, keyboardType: TextInputType.multiline, ),
 
               SizedBox(height: 20,),
 
@@ -174,23 +162,15 @@ class _SellProductScreenState extends State<SellProductScreen> {
                     fontWeight: FontWeight.bold,
               ),)),
                SizedBox(height: 20,),
-               CustomInputs(label: 'Total', fieldType: false, keyboardType: TextInputType.multiline, onChanged: (value) {
-                          onEmailChange(value);
-                        },),
+               CustomInputs(label: 'Total', fieldType: false, keyboardType: TextInputType.multiline, ),
                SizedBox(height: 20,),
-               CustomInputs(label: 'Paid Amount', fieldType: false, keyboardType: TextInputType.multiline, onChanged: (value) { 
-                onEmailChange(value);
-                        },),
+               CustomInputs(label: 'Paid Amount', fieldType: false, keyboardType: TextInputType.multiline, ),
               
               SizedBox(height: 20,),
-               CustomInputs(label: 'Remain Amount', fieldType: false, keyboardType: TextInputType.multiline, onChanged: (value) { 
-                onEmailChange(value);
-                        },),
+               CustomInputs(label: 'Remain Amount', fieldType: false, keyboardType: TextInputType.multiline, ),
 
               SizedBox(height: 20,),
-               CustomInputs(label: 'Transaction Num. If Payment in Card/Online ', fieldType: false, keyboardType: TextInputType.multiline, onChanged: (value) { 
-                onEmailChange(value);
-                        },),
+               CustomInputs(label: 'Transaction Num. If Payment in Card/Online ', fieldType: false, keyboardType: TextInputType.multiline, ),
               SizedBox(height: 20,),
               CustomButton(btn_label: 'Sell Tiles', onPressed: () {},)
             ],

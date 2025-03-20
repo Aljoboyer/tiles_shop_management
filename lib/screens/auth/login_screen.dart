@@ -46,14 +46,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       ),),
                       SizedBox(height: screenHeight * 0.03,),
-                      CustomInputs(label: 'Email',fieldType: false, onChanged: (value) {
-                        onEmailChange(value);
-                      },),
+                      CustomInputs(label: 'Email',fieldType: false, ),
                       SizedBox(height: screenHeight * 0.03,),
 
-                       CustomInputs(label: 'Password',fieldType: true, onChanged: (value) {
-                        onEmailChange(value);
-                      },),
+                       CustomInputs(label: 'Password',fieldType: true, ),
 
                       SizedBox(height: screenHeight * 0.03,),
 

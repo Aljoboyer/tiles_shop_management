@@ -20,7 +20,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     leading: IconButton(
       icon: Icon(Icons.arrow_back), // Back arrow icon
       onPressed: () {
-        context.go('/tabs'); // Go back to the previous screen
+         context.go('/tabs/0'); //us screen
       },
         ),
       ),

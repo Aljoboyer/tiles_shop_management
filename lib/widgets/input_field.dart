@@ -1,23 +1,27 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class CustomInputs extends StatelessWidget {
   final String label;
   final String? inputError;
-  final Function(String) onChanged;
+  // final Function(String) onChanged;
   final bool fieldType;
   final double? height;
   final TextInputType ? keyboardType;
   final int ? maxLines;
+  final TextEditingController? inputController;
 
   const CustomInputs({
     super.key,
     required this.label,
     this.inputError,
-    required this.onChanged,
+    // required this.onChanged,
     required this.fieldType,
     this.height,
     this.keyboardType = TextInputType.text,
     this.maxLines,
+     this.inputController
   });
 
   @override
@@ -52,10 +56,10 @@ class CustomInputs extends StatelessWidget {
               errorStyle: TextStyle(color: const Color.fromARGB(255, 255, 17, 0), fontWeight: FontWeight.bold)
               
             ),
-          // controller: widget.emailController,
-            onChanged: (value) {
-              onChanged(value);
-          },
+          controller: inputController,
+          //   onChanged: (value) {
+          //     onChanged(value);
+          // },
           ),
            )
         ],

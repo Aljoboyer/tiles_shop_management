@@ -124,9 +124,7 @@ class _HomeState extends State<Home> {
             ),
              SizedBox(
                   width: screenWidth * 0.9,
-                  child: CustomInputs(label: 'Search By Name',height: 35, fieldType: false, onChanged: (value) {
-                          onEmailChange(value);
-                        },),
+                  child: CustomInputs(label: 'Search By Name',height: 35, fieldType: false, ),
                 ),
 
               SizedBox(
