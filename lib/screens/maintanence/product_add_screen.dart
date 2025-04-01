@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tiles_shop_management/utils/constant/cons_data.dart';
 import 'package:tiles_shop_management/widgets/button.dart';
 import 'package:tiles_shop_management/widgets/dropdown.dart';
+import 'package:tiles_shop_management/widgets/error_text.dart';
 import 'package:tiles_shop_management/widgets/input_field.dart';
+import 'package:tiles_shop_management/widgets/label_text.dart';
 
 class ProductAddScreen extends StatefulWidget {
   const ProductAddScreen({super.key});
@@ -13,32 +15,77 @@ class ProductAddScreen extends StatefulWidget {
 
 class _ProductAddScreenState extends State<ProductAddScreen> {
    late String productName;
-    String? selectedSizeValue; 
-    String? selectedCatgoryValue; 
+  String? selectedSizeValue; 
+  String? selectedCatgoryValue; 
 
-    final TextEditingController _productNameController = TextEditingController();
-    final TextEditingController _productPieceController = TextEditingController();
+  final TextEditingController _productNameController = TextEditingController();
+  final TextEditingController _productPieceController = TextEditingController();
+// Error messages for validation
+  String? _nameError;
+  String? _piecesError;
+  String? _sizeError;
+  String? _categoryError;
 
   void showSizeDropdown ()async {
     await showDropDown(context, sizeItems, (item) {setState(() {
       selectedSizeValue = item;
+      _sizeError = null;
       });});
   }
 
   void showCategoryDropdown ()async {
     await showDropDown(context, categoryItems, (item) {setState(() {
       selectedCatgoryValue = item;
+      _categoryError = null;
       });});
   }
 
-  void _productAddHandler () {
-    final prod_rq = {
-      'product_name': _productNameController.text,
-      'product_pieces': _productPieceController.text,
-      'product_size': selectedSizeValue,
-      'product_category': selectedCatgoryValue,
-    };
-    print(prod_rq);
+   void _productAddHandler() {
+    print(_piecesError);
+
+    setState(() {
+      // Validate product name
+      if (_productNameController.text.isEmpty) {
+        _nameError = "Product name is required";
+      } else {
+        _nameError = null;
+      }
+
+      // Validate product pieces
+      if (_productPieceController.text.isEmpty) {
+        _piecesError = "Number of pieces is required";
+      } else {
+        _piecesError = null;
+      }
+
+      // Validate dropdowns
+      _sizeError = selectedSizeValue == null ? "Please select a size" : null;
+      _categoryError = selectedCatgoryValue == null ? "Please select a category" : null;
+    });
+
+    // If all fields are valid, proceed
+    if (_nameError == null &&
+        _piecesError == null &&
+        _sizeError == null &&
+        _categoryError == null) {
+      final prodRequest = {
+        'product_name': _productNameController.text,
+        'product_pieces': _productPieceController.text,
+        'product_size': selectedSizeValue,
+        'product_category': selectedCatgoryValue,
+      };
+
+      print(prodRequest);
+        ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Product added successfully!"),
+        showCloseIcon: true,
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.only(bottom: 500, left: 20, right: 20), 
+        duration: Duration(seconds: 1),
+      ),
+      );
+    }
   }
 
   @override
@@ -71,15 +118,11 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
           child: Column(
             children: [
               CustomInputs(label: 'Tiles Name',fieldType: false,  inputController: _productNameController),
+               if (_nameError != null)
+                CustomErrorText(errtext: _nameError),
               SizedBox(height: 20),
               
-              Align(
-            alignment: Alignment.centerLeft,
-            child: Text('Tiles Size', style: TextStyle(
-                  color:Color(0xFF044B91),
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),)),
+            CustomlabelText(label: 'Tiles Size',),
             SizedBox(height: 10,),
               SizedBox(
                 width: double.infinity,
@@ -106,19 +149,19 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   ),
                 ),
               ),
+               if (_sizeError != null)
+                CustomErrorText(errtext: _sizeError),
+
               SizedBox(height: 20,),
 
                CustomInputs(label: 'Tiles Pieces',fieldType: false, inputController: _productPieceController,
                         ),
+               if (_piecesError != null)
+                CustomErrorText(errtext: _piecesError),
+
                SizedBox(height: 20,),
               
-              Align(
-            alignment: Alignment.centerLeft,
-            child: Text('Tiles Category', style: TextStyle(
-                  color:Color(0xFF044B91),
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),)),
+              CustomlabelText(label: 'Tiles Category',),
             SizedBox(height: 10,),
               SizedBox(
                 width: double.infinity,
@@ -145,6 +188,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   ),
                 ),
               ),
+
+               if (_categoryError != null)
+                CustomErrorText(errtext: _categoryError),
                SizedBox(height: 20,),
               CustomButton(btn_label: 'Add Tiles', onPressed: _productAddHandler,)
             ],

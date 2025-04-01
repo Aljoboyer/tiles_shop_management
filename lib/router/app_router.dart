@@ -24,13 +24,6 @@ class AppRouter {
         return BottomTabScreen(initialTab: tabIndex); // Pass it to the screen
       },
       ),
-      // GoRoute(
-      //   path: '/product-details/:id',
-      //   builder: (context, state) {
-      //     final productId = state.pathParameters['id'];
-      //     return ProductDetailsScreen(productId: productId!);
-      //   },
-      // ),
     ],
     redirect: (context, state) {
       final bool isLoggedIn = AuthService.isLoggedIn;
