@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tiles_shop_management/utils/constant/cons_data.dart';
 import 'package:tiles_shop_management/widgets/button.dart';
 import 'package:tiles_shop_management/widgets/dropdown.dart';
+import 'package:tiles_shop_management/widgets/dropdown_btn.dart';
 import 'package:tiles_shop_management/widgets/error_text.dart';
 import 'package:tiles_shop_management/widgets/input_field.dart';
 import 'package:tiles_shop_management/widgets/label_text.dart';
@@ -124,31 +125,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
               
             CustomlabelText(label: 'Tiles Size',),
             SizedBox(height: 10,),
-              SizedBox(
-                width: double.infinity,
-                height: 40,// Full width button
-                child: ElevatedButton(
-                  onPressed: showSizeDropdown,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white, 
-                    
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6), 
-                      side: BorderSide(color: Colors.grey, width: 1), // Border color and width
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Aligns text left, icon right
-                    children: [
-                      Text(
-                        selectedSizeValue ?? "Select size",
-                        style: TextStyle(color: Colors.black), // Ensure text is visible on white
-                      ),
-                      Icon(Icons.arrow_drop_down, color: Colors.black), // Right-aligned icon
-                    ],
-                  ),
-                ),
-              ),
+            DropdownBtn(showDropdown: showSizeDropdown, selectedValue: selectedSizeValue, placeholderTxt:  "Select Size",),
                if (_sizeError != null)
                 CustomErrorText(errtext: _sizeError),
 
@@ -162,32 +139,8 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                SizedBox(height: 20,),
               
               CustomlabelText(label: 'Tiles Category',),
-            SizedBox(height: 10,),
-              SizedBox(
-                width: double.infinity,
-                height: 40,// Full width button
-                child: ElevatedButton(
-                  onPressed: showCategoryDropdown,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white, 
-                    
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6), 
-                      side: BorderSide(color: Colors.grey, width: 1), // Border color and width
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Aligns text left, icon right
-                    children: [
-                      Text(
-                        selectedCatgoryValue ?? "Select Category",
-                        style: TextStyle(color: Colors.black), // Ensure text is visible on white
-                      ),
-                      Icon(Icons.arrow_drop_down, color: Colors.black), // Right-aligned icon
-                    ],
-                  ),
-                ),
-              ),
+              SizedBox(height: 10,),
+              DropdownBtn(showDropdown: showCategoryDropdown, selectedValue: selectedCatgoryValue, placeholderTxt: "Select Category",),
 
                if (_categoryError != null)
                 CustomErrorText(errtext: _categoryError),

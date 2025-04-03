@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tiles_shop_management/utils/constant/cons_data.dart';
 import 'package:tiles_shop_management/widgets/button.dart';
 import 'package:tiles_shop_management/widgets/dropdown.dart';
+import 'package:tiles_shop_management/widgets/dropdown_btn.dart';
 import 'package:tiles_shop_management/widgets/input_field.dart';
+import 'package:tiles_shop_management/widgets/label_text.dart';
 
 class SellProductScreen extends StatefulWidget {
   const SellProductScreen({super.key});
@@ -12,20 +15,32 @@ class SellProductScreen extends StatefulWidget {
 
 class _SellProductScreenState extends State<SellProductScreen> {
    late String productName;
-     String? selectedValue; // Stores the selected value
+  String? selectedSizeValue; 
+  String? selectedCatgoryValue; 
 
-  List<String> items = ['Apple', 'Banana', 'Cherry', 'Date', "Aanaras", "Chicken", "Mango", "Papaya"]; // Dropdown items
+  String? _sizeError;
+  String? _categoryError;
 
    onEmailChange (value) {
     setState(() {
       productName: value;
     });
   }
-  void showCustomDropdown ()async {
- await showDropDown(context, items, (item) {setState(() {
-   selectedValue = item;
- });});
-}
+ 
+  void showSizeDropdown ()async {
+    await showDropDown(context, sizeItems, (item) {setState(() {
+      selectedSizeValue = item;
+      _sizeError = null;
+      });});
+  }
+
+  void showCategoryDropdown ()async {
+    await showDropDown(context, categoryItems, (item) {setState(() {
+      selectedCatgoryValue = item;
+      _categoryError = null;
+      });});
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,79 +76,19 @@ class _SellProductScreenState extends State<SellProductScreen> {
               CustomInputs(label: 'Tiles Name',fieldType: false, ),
               SizedBox(height: 20,),
               
-              Align(
-            alignment: Alignment.centerLeft,
-            child: Text('Tiles Size', style: TextStyle(
-                  color:Color(0xFF044B91),
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),)),
+           CustomlabelText(label: 'Tiles Size',),
             SizedBox(height: 10,),
-              SizedBox(
-                width: double.infinity,
-                height: 40,// Full width button
-                child: ElevatedButton(
-                  onPressed: showCustomDropdown,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white, 
-                    
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6), 
-                      side: BorderSide(color: Colors.grey, width: 1), // Border color and width
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Aligns text left, icon right
-                    children: [
-                      Text(
-                        selectedValue ?? "Select size",
-                        style: TextStyle(color: Colors.black), // Ensure text is visible on white
-                      ),
-                      Icon(Icons.arrow_drop_down, color: Colors.black), // Right-aligned icon
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 20,),
+            DropdownBtn(showDropdown: showSizeDropdown, selectedValue: selectedSizeValue, placeholderTxt: "Select Size",),
+            SizedBox(height: 20,),
 
-               CustomInputs(label: 'Tiles Pieces',fieldType: false, ),
-               SizedBox(height: 20,),
+            CustomInputs(label: 'Tiles Pieces',fieldType: false, ),
+            SizedBox(height: 20,),
               
-              Align(
-            alignment: Alignment.centerLeft,
-            child: Text('Tiles Category', style: TextStyle(
-                  color:Color(0xFF044B91),
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),)),
+            CustomlabelText(label: 'Tiles Category',),
             SizedBox(height: 10,),
-              SizedBox(
-                width: double.infinity,
-                height: 40,// Full width button
-                child: ElevatedButton(
-                  onPressed: showCustomDropdown,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white, 
-                    
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6), 
-                      side: BorderSide(color: Colors.grey, width: 1), // Border color and width
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Aligns text left, icon right
-                    children: [
-                      Text(
-                        selectedValue ?? "Select size",
-                        style: TextStyle(color: Colors.black), // Ensure text is visible on white
-                      ),
-                      Icon(Icons.arrow_drop_down, color: Colors.black), // Right-aligned icon
-                    ],
-                  ),
-                ),
-              ),
+            DropdownBtn(showDropdown: showCategoryDropdown, selectedValue: selectedCatgoryValue, placeholderTxt: "Select Category",),
                
-               SizedBox(height: 20,),
+            SizedBox(height: 20,),
 
                Align(
                 alignment: Alignment.centerLeft,
