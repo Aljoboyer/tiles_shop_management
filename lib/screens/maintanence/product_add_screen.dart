@@ -45,14 +45,11 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
     print(_piecesError);
 
     setState(() {
-      // Validate product name
       if (_productNameController.text.isEmpty) {
         _nameError = "Product name is required";
       } else {
         _nameError = null;
       }
-
-      // Validate product pieces
       if (_productPieceController.text.isEmpty) {
         _piecesError = "Number of pieces is required";
       } else {
@@ -81,8 +78,6 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
       SnackBar(
         content: Text("Product added successfully!"),
         showCloseIcon: true,
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.only(bottom: 500, left: 20, right: 20), 
         duration: Duration(seconds: 1),
       ),
       );
@@ -95,7 +90,6 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
     _productPieceController.dispose(); 
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
