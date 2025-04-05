@@ -16,16 +16,15 @@ class SellProductScreen extends StatefulWidget {
 class _SellProductScreenState extends State<SellProductScreen> {
    late String productName;
   String? selectedSizeValue; 
-  String? selectedCatgoryValue; 
+  String? selectedCatgoryValue;
+
+  final TextEditingController _productNameController = TextEditingController();
+  final TextEditingController _productPieceController = TextEditingController();
 
   String? _sizeError;
   String? _categoryError;
-
-   onEmailChange (value) {
-    setState(() {
-      productName: value;
-    });
-  }
+   String? _nameError;
+  String? _piecesError;
  
   void showSizeDropdown ()async {
     await showDropDown(context, sizeItems, (item) {setState(() {
@@ -41,6 +40,59 @@ class _SellProductScreenState extends State<SellProductScreen> {
       });});
   }
 
+  void sellHandler () {
+    
+    setState(() {
+      if (_productNameController.text.isEmpty) {
+        _nameError = "Product name is required";
+      } else {
+        _nameError = null;
+      }
+      if (_productPieceController.text.isEmpty) {
+        _piecesError = "Number of pieces is required";
+      } else {
+        _piecesError = null;
+      }
+
+      // Validate dropdowns
+      _sizeError = selectedSizeValue == null ? "Please select a size" : null;
+      _categoryError = selectedCatgoryValue == null ? "Please select a category" : null;
+    });
+
+    // If all fields are valid, proceed
+    if (_nameError == null &&
+        _piecesError == null &&
+        _sizeError == null &&
+        _categoryError == null) {
+      final prodRequest = {
+        'product_name': _productNameController.text,
+        'product_pieces': _productPieceController.text,
+        'product_size': selectedSizeValue,
+        'product_category': selectedCatgoryValue,
+      };
+
+      print(prodRequest);
+        ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Product added successfully!"),
+        showCloseIcon: true,
+        duration: Duration(seconds: 1),
+      ),
+      );
+    }
+  }
+  
+  void onNameHandler (a) {
+    setState(() {
+      _nameError = null;
+    });
+  }
+
+  void onPiecesHandler (a) {
+    setState(() {
+      _piecesError = null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,23 +124,35 @@ class _SellProductScreenState extends State<SellProductScreen> {
               ),)),
 
               SizedBox(height: 20,),
+              
+              CustomInputs(label: 'Tiles Name',fieldType: false,
+              inputController: _productNameController,
+              onChanged: onNameHandler,
+              error: _nameError,
+              ),
+              
+              SizedBox(height: 20),
+              
+              CustomlabelText(label: 'Tiles Size',),
+              SizedBox(height: 10,),
+              DropdownBtn(showDropdown: showSizeDropdown, selectedValue: selectedSizeValue, placeholderTxt:  "Select Size", error: _sizeError,),
 
-              CustomInputs(label: 'Tiles Name',fieldType: false, ),
               SizedBox(height: 20,),
-              
-           CustomlabelText(label: 'Tiles Size',),
-            SizedBox(height: 10,),
-            DropdownBtn(showDropdown: showSizeDropdown, selectedValue: selectedSizeValue, placeholderTxt: "Select Size",),
-            SizedBox(height: 20,),
 
-            CustomInputs(label: 'Tiles Pieces',fieldType: false, ),
-            SizedBox(height: 20,),
+               CustomInputs(label: 'Tiles Pieces',
+               fieldType: false, 
+               inputController: _productPieceController,
+               onChanged: onPiecesHandler,
+                error: _piecesError,
+                ),
+
+               SizedBox(height: 20,),
               
-            CustomlabelText(label: 'Tiles Category',),
-            SizedBox(height: 10,),
-            DropdownBtn(showDropdown: showCategoryDropdown, selectedValue: selectedCatgoryValue, placeholderTxt: "Select Category",),
+              CustomlabelText(label: 'Tiles Category',),
+              SizedBox(height: 10,),
+              DropdownBtn(showDropdown: showCategoryDropdown, selectedValue: selectedCatgoryValue, placeholderTxt: "Select Category", error: _categoryError,),
                
-            SizedBox(height: 20,),
+              SizedBox(height: 20,),
 
                Align(
                 alignment: Alignment.centerLeft,
@@ -127,7 +191,7 @@ class _SellProductScreenState extends State<SellProductScreen> {
               SizedBox(height: 20,),
                CustomInputs(label: 'Transaction Num. If Payment in Card/Online ', fieldType: false, keyboardType: TextInputType.multiline, ),
               SizedBox(height: 20,),
-              CustomButton(btn_label: 'Sell Tiles', onPressed: () {},)
+              CustomButton(btn_label: 'Sell Tiles', onPressed: sellHandler,)
             ],
           ),
         ),

@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:tiles_shop_management/widgets/error_text.dart';
 
 class DropdownBtn extends StatelessWidget {
   final String ?selectedValue;
   final VoidCallback showDropdown;
   final String placeholderTxt;
+  final String? error;
 
   const DropdownBtn({
     super.key,
     this.selectedValue,
     required this.showDropdown,
     required this.placeholderTxt,
+    this.error
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Column(
+      children: [
+        SizedBox(
                 width: double.infinity,
                 height: 40,// Full width button
                 child: ElevatedButton(
@@ -38,6 +43,11 @@ class DropdownBtn extends StatelessWidget {
                     ],
                   ),
                 ),
-              );
+              ),
+        
+            if (error != null)
+            CustomErrorText(errtext: error),
+      ],
+    );
   }
 }

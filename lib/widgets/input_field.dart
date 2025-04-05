@@ -1,27 +1,29 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tiles_shop_management/widgets/error_text.dart';
 
 class CustomInputs extends StatelessWidget {
   final String label;
   final String? inputError;
-  // final Function(String) onChanged;
+  final ValueChanged? onChanged;
   final bool fieldType;
   final double? height;
   final TextInputType ? keyboardType;
   final int ? maxLines;
   final TextEditingController? inputController;
-
+  final String? error;
   const CustomInputs({
     super.key,
     required this.label,
     this.inputError,
-    // required this.onChanged,
+    this.onChanged,
     required this.fieldType,
     this.height,
     this.keyboardType = TextInputType.text,
     this.maxLines,
-     this.inputController
+    this.inputController,
+    this.error
   });
 
   @override
@@ -57,11 +59,11 @@ class CustomInputs extends StatelessWidget {
               
             ),
           controller: inputController,
-          //   onChanged: (value) {
-          //     onChanged(value);
-          // },
+            onChanged: onChanged,
           ),
-           )
+           ),
+           if (error != null)
+              CustomErrorText(errtext: error),
         ],
       ),
     );

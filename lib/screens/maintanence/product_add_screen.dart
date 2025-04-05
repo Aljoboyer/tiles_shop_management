@@ -42,7 +42,6 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
   }
 
    void _productAddHandler() {
-    print(_piecesError);
 
     setState(() {
       if (_productNameController.text.isEmpty) {
@@ -84,6 +83,18 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
     }
   }
 
+  void onNameHandler (a) {
+    setState(() {
+      _nameError = null;
+    });
+  }
+
+  void onPiecesHandler (a) {
+    setState(() {
+      _piecesError = null;
+    });
+  }
+
   @override
   void dispose() {
     _productNameController.dispose(); 
@@ -112,32 +123,33 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
           padding: EdgeInsets.all(20),
           child: Column(
             children: [
-              CustomInputs(label: 'Tiles Name',fieldType: false,  inputController: _productNameController),
-               if (_nameError != null)
-                CustomErrorText(errtext: _nameError),
+              CustomInputs(label: 'Tiles Name',fieldType: false,
+              inputController: _productNameController,
+              onChanged: onNameHandler,
+              error: _nameError,
+              ),
+              
               SizedBox(height: 20),
               
             CustomlabelText(label: 'Tiles Size',),
             SizedBox(height: 10,),
-            DropdownBtn(showDropdown: showSizeDropdown, selectedValue: selectedSizeValue, placeholderTxt:  "Select Size",),
-               if (_sizeError != null)
-                CustomErrorText(errtext: _sizeError),
+            DropdownBtn(showDropdown: showSizeDropdown, selectedValue: selectedSizeValue, placeholderTxt:  "Select Size", error: _sizeError,),
 
               SizedBox(height: 20,),
 
-               CustomInputs(label: 'Tiles Pieces',fieldType: false, inputController: _productPieceController,
-                        ),
-               if (_piecesError != null)
-                CustomErrorText(errtext: _piecesError),
+               CustomInputs(label: 'Tiles Pieces',
+               fieldType: false, 
+               inputController: _productPieceController,
+               onChanged: onPiecesHandler,
+                error: _piecesError,
+                ),
 
                SizedBox(height: 20,),
               
               CustomlabelText(label: 'Tiles Category',),
               SizedBox(height: 10,),
-              DropdownBtn(showDropdown: showCategoryDropdown, selectedValue: selectedCatgoryValue, placeholderTxt: "Select Category",),
-
-               if (_categoryError != null)
-                CustomErrorText(errtext: _categoryError),
+              DropdownBtn(showDropdown: showCategoryDropdown, selectedValue: selectedCatgoryValue, placeholderTxt: "Select Category", error: _categoryError,),
+              
                SizedBox(height: 20,),
               CustomButton(btn_label: 'Add Tiles', onPressed: _productAddHandler,)
             ],
