@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tiles_shop_management/state/tiles_selling_provider.dart';
 import 'package:tiles_shop_management/utils/constant/cons_data.dart';
 import 'package:tiles_shop_management/widgets/button.dart';
 import 'package:tiles_shop_management/widgets/dropdown.dart';
@@ -6,15 +8,15 @@ import 'package:tiles_shop_management/widgets/dropdown_btn.dart';
 import 'package:tiles_shop_management/widgets/input_field.dart';
 import 'package:tiles_shop_management/widgets/label_text.dart';
 
-class SellProductScreen extends StatefulWidget {
+class SellProductScreen extends ConsumerStatefulWidget {
   const SellProductScreen({super.key});
 
   @override
-  State<SellProductScreen> createState() => _SellProductScreenState();
+  ConsumerState<SellProductScreen> createState() => _SellProductScreenState();
 }
 
-class _SellProductScreenState extends State<SellProductScreen> {
-   late String productName;
+class _SellProductScreenState extends ConsumerState<SellProductScreen> {
+  late String productName;
   String? selectedSizeValue; 
   String? selectedCatgoryValue;
 
@@ -96,6 +98,9 @@ class _SellProductScreenState extends State<SellProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+      final tiles = ref.watch(tileSellingProvider);
+      print(tiles);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiles_shop_management/utils/constant/cons_data.dart';
 import 'package:tiles_shop_management/widgets/filter_dialog.dart';
 import 'package:tiles_shop_management/widgets/input_field.dart';
 import 'package:tiles_shop_management/widgets/product_card.dart';
@@ -87,10 +88,10 @@ class _HomeState extends State<Home> {
   }
 
   void filterBySize () async {
-    await showFilterModal(context, ['S', 'XL', 'M'], (val) {});
+    await showFilterModal(context, sizeItems, (val) {});
   }
   void filterByCategory () async {
-    await showFilterModal(context, ['ABM', 'MB', 'XYZ'], (val) {});
+    await showFilterModal(context, categoryItems, (val) {});
   }
   @override
   Widget build(BuildContext context) {

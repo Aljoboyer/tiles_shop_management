@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiles_shop_management/router/app_router.dart';
 
 void main() {
@@ -11,10 +12,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
    @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return ProviderScope(child: MaterialApp.router(
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
-    );
+    ));
   }
 
 }
